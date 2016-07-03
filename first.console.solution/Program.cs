@@ -5,6 +5,7 @@ namespace first.console.solution
 {
 	class OrbitingBody {
 		public double Mass = 0;
+		public double Diameter = 0;
 		public int OrbitingRadius = 0;
 		static Random generate = new Random();
 
@@ -15,7 +16,9 @@ namespace first.console.solution
 		public void SetMass (double min, double max){
 			Mass = generate.NextDouble() * (max - min) + min;
 		}
-
+		public void SetDiameter (double min, double max){
+			Diameter = generate.NextDouble () * (max - min) + min;
+		}
 	}
 	class Star: OrbitingBody {
 		string StarCategory;
@@ -23,7 +26,7 @@ namespace first.console.solution
 
 
 		static string[] StarCategoryArray = new string[]{
-			"Star", "Pulsar","Black Hole","Supernova"
+			"Star", "Neutron Star","Black Hole","Supernova"
 		};
 		static string[] StarTypeArray = new string[] {
 			"Red Dwarf", "Orange Dwarf", "Yellow Star", "White Dwarf", "White Giant", "Blue Giant", "Blue Hypergiant"
@@ -40,6 +43,7 @@ namespace first.console.solution
 			}
 			if (StarType == "Red Dwarf") {
 				SetMass (0.15E33, 0.9E33);
+				SetDiameter ();
 			} else if (StarType == "Orange Dwarf") {
 				SetMass (0.9E33, 1.6E33);
 			} else if (StarType == "Yellow Star") {
@@ -56,6 +60,8 @@ namespace first.console.solution
 				SetMass (10E33, 80E33);
 			} else if (StarType == "Supernova") {
 				Mass = double.NaN;
+			} else if (StarType == "Neutron Star") {
+				SetMass (2.2E33, 6E33);
 			}
 		}
 		public void Print (){
