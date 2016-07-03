@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace first.console.solution
 {
@@ -67,6 +69,19 @@ namespace first.console.solution
 			Console.WriteLine (" Distance to center: " + OrbitingRadius);
 			Console.WriteLine (" Mass              : " + Mass.ToString("E2"));
 		}
+
+		public JObject toObject(){
+			JObject o = new JObject (); //The object to be returned.
+			JValue jMass = new JValue (Mass);
+			JValue jOR = new JValue (OrbitingRadius);
+			JValue jCat = new JValue (StarCategory);
+			JValue jType = new JValue (StarType);
+			o["Mass"] = jMass;
+			o["OrbitingRadius"] = jOR;
+			o["StarCategory"] = jCat;
+			o["StarType"] = jType;
+			return o;
+		}
 	}
 
 	class Planet: OrbitingBody {
@@ -127,10 +142,15 @@ namespace first.console.solution
 		}
 		
 	}
+
+
 	class MainClass
 	{
 		public static void Main (string[] args)
 		{
+			Console.WriteLine ("Testing");
+
+
 			for (int i = 1; i == 1; i = 1) 
 			{
 				SolarSystemGen ();
@@ -162,6 +182,14 @@ namespace first.console.solution
 			for (int i = 0; i < ps.Length; i++) {
 				ps[i].Print();
 			}
+		}
+
+		public static JArray StarArraytoObject(Star[] s){
+			JArray arr = new JArray ();
+			for (int i =0;i<s.Length;i++){
+				arr.Add (s [i].toObject ());
+			}
+			return arr;
 		}
 
 		/*Creates stars and orbiting bodies.
@@ -209,8 +237,10 @@ namespace first.console.solution
 				PrintPlanetArray (Planets);
 			}
 
-			Console.WriteLine ("bla");
+			Console.WriteLine ("Het object:");
 
+			JArray a = StarArraytoObject (Stars);
+			Console.WriteLine (a.ToString ());
 		}
 	}
 }
