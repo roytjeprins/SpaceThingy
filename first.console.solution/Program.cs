@@ -209,7 +209,7 @@ namespace first.console.solution
 				PrintPlanetArray (Planets);
 			}
 
-
+			Console.WriteLine ("bla");
 
 		}
 	}
