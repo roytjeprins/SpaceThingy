@@ -45,7 +45,7 @@ namespace first.console.solution
 			}
 			if (StarType == "Red Dwarf") {
 				SetMass (0.15E33, 0.9E33);
-				SetDiameter ();
+				//SetDiameter ();
 			} else if (StarType == "Orange Dwarf") {
 				SetMass (0.9E33, 1.6E33);
 			} else if (StarType == "Yellow Star") {
