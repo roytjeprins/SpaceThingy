@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -45,7 +46,7 @@ namespace first.console.solution
 			}
 			if (StarType == "Red Dwarf") {
 				SetMass (0.15E33, 0.9E33);
-				SetDiameter ();
+				//SetDiameter ();
 			} else if (StarType == "Orange Dwarf") {
 				SetMass (0.9E33, 1.6E33);
 			} else if (StarType == "Yellow Star") {
@@ -76,7 +77,7 @@ namespace first.console.solution
 			Console.WriteLine (" Mass              : " + Mass.ToString("E2"));
 		}
 
-		public JObject toObject(){
+		public JObject toJObject(){
 			JObject o = new JObject (); //The object to be returned.
 			JValue jMass = new JValue (Mass);
 			JValue jOR = new JValue (OrbitingRadius);
@@ -106,11 +107,11 @@ namespace first.console.solution
 			if (nummoons < 0) {
 				nummoons = Generate.Next(0,5);
 			}
-				
+
 			Moons = new Planet[nummoons];
 			for (int i = 0; i < nummoons; i++) {					
 				Moons [i] = new Planet (0);	
-		 	}		
+			}		
 		}
 
 		public void Print (string h){
@@ -121,7 +122,32 @@ namespace first.console.solution
 			for (int i = 0; i < Moons.Length; i++) {
 				Moons [i].Print("   ");
 			}
-		
+
+		}
+
+		public JObject toJObject(){
+			JObject o = new JObject (); //The object to be returned.
+			JValue jMass = new JValue (Mass);
+			JValue jOR = new JValue (OrbitingRadius);
+
+			JValue jType = new JValue (PlanetType);
+			o["Mass"] = jMass;
+			o["OrbitingRadius"] = jOR;
+			o["PlanetType"] = jType;
+
+			//Moon array:
+			JArray jmoons = new JArray();
+
+			for (int i = 0; i < Moons.Length; i++) {
+				JObject m = Moons [i].toJObject ();
+				jmoons.Add (m);
+			}
+
+			if (Moons.Length > 0) {
+				o ["Moons"] = jmoons;
+			}
+
+			return o;
 		}
 
 	}
@@ -146,7 +172,7 @@ namespace first.console.solution
 			}
 			return 0;
 		}
-		
+
 	}
 
 
@@ -190,10 +216,18 @@ namespace first.console.solution
 			}
 		}
 
-		public static JArray StarArraytoObject(Star[] s){
+		public static JArray StarArraytoJObject(Star[] s){
 			JArray arr = new JArray ();
 			for (int i =0;i<s.Length;i++){
-				arr.Add (s [i].toObject ());
+				arr.Add (s [i].toJObject ());
+			}
+			return arr;
+		}
+
+		public static JArray PlanetArraytoJObject(Planet[] s){
+			JArray arr = new JArray ();
+			for (int i =0;i<s.Length;i++){
+				arr.Add (s[i].toJObject ());
 			}
 			return arr;
 		}
@@ -208,7 +242,7 @@ namespace first.console.solution
 			Random Generate = new Random ();
 			Choose Dice = new Choose ();
 
-			int PlanetAmount = Generate.Next (0,1);
+			int PlanetAmount = Generate.Next (0,8);
 			int StarAmount = Dice.Roll (new int[] {800, 170, 26, 4}) + 1;
 			//int[] bla = { 1, 2, 3 };
 
@@ -243,10 +277,21 @@ namespace first.console.solution
 				PrintPlanetArray (Planets);
 			}
 
-			Console.WriteLine ("Het object:");
+			Console.WriteLine ("\nHet object:");
 
-			JArray a = StarArraytoObject (Stars);
-			Console.WriteLine (a.ToString ());
+
+			//Build Json objects, and write them to file.
+			JObject jsector = new JObject ();
+
+			JArray s = StarArraytoJObject (Stars);
+			JArray p = PlanetArraytoJObject (Planets);
+			jsector ["Stars"] = s;
+			jsector["Planets"] = p;
+			string jsonstring = jsector.ToString ();
+			File.WriteAllText("output.json", jsonstring);
+
+			//Show me!
+			Console.WriteLine (jsonstring);
 		}
 	}
 }
