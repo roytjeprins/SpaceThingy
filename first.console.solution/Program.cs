@@ -285,8 +285,12 @@ namespace first.console.solution
 
 			JArray s = StarArraytoJObject (Stars);
 			JArray p = PlanetArraytoJObject (Planets);
-			jsector ["Stars"] = s;
-			jsector["Planets"] = p;
+			if (Stars.Length > 0) {
+				jsector ["Stars"] = s;
+			}
+			if (Planets.Length > 0) {
+				jsector ["Planets"] = p;
+			}
 			string jsonstring = jsector.ToString ();
 			File.WriteAllText("output.json", jsonstring);
 
