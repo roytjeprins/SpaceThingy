@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Superbest_random;
 
 namespace first.console.solution
 {
@@ -296,6 +297,13 @@ namespace first.console.solution
 
 			//Show me!
 			Console.WriteLine (jsonstring);
+
+			//Test gaussian distribution.
+			var r = new Random();
+			for (int i = 0;i<25;i++){
+				var x = r.NextGaussian(5,2); //Get a number around 5, with a 2 deviation.
+				Console.WriteLine (x);
+			}
 		}
 	}
 }
