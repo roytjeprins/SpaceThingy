@@ -13,6 +13,8 @@ namespace first.console.solution
 		public int OrbitingRadius = 0;
 		static Random generate = new Random();
 
+
+
 		public OrbitingBody (){
 			OrbitingRadius = generate.Next(0,1000);
 			Mass = generate.Next (0,1000);
@@ -26,14 +28,19 @@ namespace first.console.solution
 	}
 	class Star: OrbitingBody {
 		string StarCategory;
+		string StarSize;
+		string StarColor;
 		string StarType;
 
 
 		static string[] StarCategoryArray = new string[]{
 			"Star", "Neutron Star","Black Hole","Supernova"
 		};
-		static string[] StarTypeArray = new string[] {
-			"Red Dwarf", "Orange Dwarf", "Yellow Star", "White Dwarf", "White Giant", "Blue Giant", "Blue Hypergiant"
+		static string[] StarColorArray = new string[] {
+			"Red", "Orange", "Yellow", "Yellow White", "White", "Blue White", "Blue"
+		};
+		static string[] StarSizeArray = new string[] {
+			"Dwarf", "Giant", "Supergiant", "Hypergiant"
 		};
 		static Choose Dice = new Choose ();
 
@@ -41,31 +48,93 @@ namespace first.console.solution
 			StarCategory = StarCategoryArray [Dice.Roll (new int[]{ 95, 3, 2, 1 })];
 
 			if (StarCategory == "Star") {
-				StarType = StarTypeArray [Dice.Roll (new int[]{ 765, 121, 76, 30, 6, 2, 1})];
+				StarColor = StarColorArray [Dice.Roll (new int[]{ 765, 121, 76, 30, 6, 2, 1})];
+				StarSize = StarSizeArray [Dice.Roll (new int[]{ 80, 16, 3, 1 })];
 			} else {
 				StarType = StarCategory;
+				StarColor = "N/A";
+				StarSize = "N/A";
 			}
-			if (StarType == "Red Dwarf") {
-				SetMass (0.15E33, 0.9E33);
-				//SetDiameter ();
-			} else if (StarType == "Orange Dwarf") {
-				SetMass (0.9E33, 1.6E33);
-			} else if (StarType == "Yellow Star") {
-				SetMass (1.6E33, 2.08E33);
-			} else if (StarType == "White Dwarf") {
-				SetMass (2.08E33, 2.8E33);
-			} else if (StarType == "White Giant") {
-				SetMass (2.8E33, 4.2E33);
-			} else if (StarType == "Blue Giant") {
-				SetMass (4.2E33, 32E33);
-			} else if (StarType == "Blue Hypergiant") {
-				SetMass (32E33, 64E33);
-			} else if (StarType == "Black Hole") {
+			if (StarColor == "Red") {
+				if (StarSize == "Dwarf") {
+					SetMass (0.15E33, 0.9E33);				
+				} else if (StarSize == "Giant") {
+					SetMass (1E33, 8E33);
+				}else if(StarSize == "Supergiant"){
+					SetMass (8.1E33, 12E33);
+				}else if(StarSize=="Hypergiant"){
+					SetMass (12.1E33, 20E33);
+				}				 		
+			} else if (StarColor == "Orange") {
+				if (StarSize == "Dwarf") {
+					SetMass (0.9E33, 1.6E33);				
+				} else if (StarSize == "Giant") {
+					SetMass (1.7E33, 8.6E33);
+				}else if(StarSize == "Supergiant"){
+					SetMass (8.7E33, 15E33);
+				}else if(StarSize=="Hypergiant"){
+					SetMass (15.1E33, 26E33);
+				}					
+			} else if (StarColor == "Yellow") {
+				if (StarSize == "Dwarf") {
+					SetMass (1.6E33, 2.08E33);				
+				} else if (StarSize == "Giant") {
+					SetMass (2.09E33, 9E33);
+				}else if(StarSize == "Supergiant"){
+					SetMass (9.1E33, 18E33);
+				}else if(StarSize=="Hypergiant"){
+					SetMass (18.1E33, 40E33);
+				}		
+			} else if (StarColor == "Yellow White") {
+				if (StarSize == "Dwarf") {
+					SetMass (2.08E33, 2.8E33);			
+				} else if (StarSize == "Giant") {
+					SetMass (2.9E33, 10.5E33);
+				}else if(StarSize == "Supergiant"){
+					SetMass (10.6E33, 20E33);
+				}else if(StarSize=="Hypergiant"){
+					SetMass (20.1E33, 44E33);
+				}							
+			} else if (StarColor == "White") {
+				if (StarSize == "Dwarf") {
+					SetMass (2.8E33, 4.2E33);			
+				} else if (StarSize == "Giant") {
+					SetMass (4.3E33, 12E33);
+				}else if(StarSize == "Supergiant"){
+					SetMass (12.1E33, 25E33);
+				}else if(StarSize=="Hypergiant"){
+					SetMass (25.1E33, 48E33);
+				}							
+			} else if (StarColor == "Blue White") {
+				if (StarSize == "Dwarf") {
+					SetMass (4.2E33, 32E33);			
+				} else if (StarSize == "Giant") {
+					SetMass (32.1E33, 40.3E33);
+				}else if(StarSize == "Supergiant"){
+					SetMass (40.4E33, 62.5E33);
+				}else if(StarSize=="Hypergiant"){
+					SetMass (62.5E33, 87E33);
+				}	
+			} else if (StarColor == "Blue") {
+				if (StarSize == "Dwarf") {
+					SetMass (32E33, 64E33);			
+				} else if (StarSize == "Giant") {
+					SetMass (64.1E33, 82.2E33);
+				}else if(StarSize == "Supergiant"){
+					SetMass (82.3E33, 122E33);
+				}else if(StarSize=="Hypergiant"){
+					SetMass (122.1E33, 235E33);
+				}
+			}
+			if (StarCategory == "Black Hole") {
 				SetMass (10E33, 80E33);
-			} else if (StarType == "Supernova") {
+			} else if (StarCategory == "Supernova") {
 				Mass = double.NaN;
-			} else if (StarType == "Neutron Star") {
+			} else if (StarCategory == "Neutron Star") {
 				SetMass (2.2E33, 6E33);
+			}
+			if (StarCategory == "Star") {
+				StarType = StarColor + " " + StarSize;
 			}
 		}
 		public void Print (){
@@ -243,7 +312,7 @@ namespace first.console.solution
 			Random Generate = new Random ();
 			Choose Dice = new Choose ();
 
-			int PlanetAmount = Generate.Next (0,8);
+			int PlanetAmount = Generate.Next (0,1);
 			int StarAmount = Dice.Roll (new int[] {800, 170, 26, 4}) + 1;
 			//int[] bla = { 1, 2, 3 };
 
@@ -298,13 +367,8 @@ namespace first.console.solution
 			//Console.WriteLine (jsonstring);
 
 			//Test gaussian distribution.
-			/*
-			var r = new Random();
-			for (int i = 0;i<25;i++){
-				var x = r.NextGaussian(5,2); //Get a number around 5, with a 2 deviation.
-				Console.WriteLine (x);
-			}
-			*/
+
+
 		}
 	}
 }
