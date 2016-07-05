@@ -278,12 +278,10 @@ namespace first.console.solution
 				PrintPlanetArray (Planets);
 			}
 
-			Console.WriteLine ("\nHet object:");
-
+			//Meuk van Dick:
 
 			//Build Json objects, and write them to file.
 			JObject jsector = new JObject ();
-
 			JArray s = StarArraytoJObject (Stars);
 			JArray p = PlanetArraytoJObject (Planets);
 			if (Stars.Length > 0) {
@@ -294,16 +292,19 @@ namespace first.console.solution
 			}
 			string jsonstring = jsector.ToString ();
 			File.WriteAllText("output.json", jsonstring);
+			//End write to file.
 
-			//Show me!
+			//Show me the file.
 			//Console.WriteLine (jsonstring);
 
 			//Test gaussian distribution.
+			/*
 			var r = new Random();
 			for (int i = 0;i<25;i++){
 				var x = r.NextGaussian(5,2); //Get a number around 5, with a 2 deviation.
 				Console.WriteLine (x);
 			}
+			*/
 		}
 	}
 }
