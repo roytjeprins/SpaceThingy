@@ -10,4 +10,5 @@
 *.*#*
 *.zip
 *.userprefs
+packages/*
 */packages/*
