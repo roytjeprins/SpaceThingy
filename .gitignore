@@ -1,0 +1,13 @@
+*.dll
+*.exe
+*.o
+*.a
+*.exe.*
+*RGraph/
+*Debug/
+*.out
+*.bmp
+*.*#*
+*.zip
+*.userprefs
+*/packages/*
