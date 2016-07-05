@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Superbest_random;
 
 namespace first.console.solution
 {
@@ -39,7 +41,7 @@ namespace first.console.solution
 			StarCategory = StarCategoryArray [Dice.Roll (new int[]{ 95, 3, 2, 1 })];
 
 			if (StarCategory == "Star") {
-				StarType = StarTypeArray [Dice.Roll (new int[]{ 765, 121, 76, 30, 6, 2, 1})];				
+				StarType = StarTypeArray [Dice.Roll (new int[]{ 765, 121, 76, 30, 6, 2, 1})];
 			} else {
 				StarType = StarCategory;
 			}
@@ -76,7 +78,7 @@ namespace first.console.solution
 			Console.WriteLine (" Mass              : " + Mass.ToString("E2"));
 		}
 
-		public JObject toObject(){
+		public JObject toJObject(){
 			JObject o = new JObject (); //The object to be returned.
 			JValue jMass = new JValue (Mass);
 			JValue jOR = new JValue (OrbitingRadius);
@@ -106,11 +108,11 @@ namespace first.console.solution
 			if (nummoons < 0) {
 				nummoons = Generate.Next(0,5);
 			}
-				
+
 			Moons = new Planet[nummoons];
-			for (int i = 0; i < nummoons; i++) {					
-				Moons [i] = new Planet (0);	
-		 	}		
+			for (int i = 0; i < nummoons; i++) {
+				Moons [i] = new Planet (0);
+			}
 		}
 
 		public void Print (string h){
@@ -121,7 +123,32 @@ namespace first.console.solution
 			for (int i = 0; i < Moons.Length; i++) {
 				Moons [i].Print("   ");
 			}
-		
+
+		}
+
+		public JObject toJObject(){
+			JObject o = new JObject (); //The object to be returned.
+			JValue jMass = new JValue (Mass);
+			JValue jOR = new JValue (OrbitingRadius);
+
+			JValue jType = new JValue (PlanetType);
+			o["Mass"] = jMass;
+			o["OrbitingRadius"] = jOR;
+			o["PlanetType"] = jType;
+
+			//Moon array:
+			JArray jmoons = new JArray();
+
+			for (int i = 0; i < Moons.Length; i++) {
+				JObject m = Moons [i].toJObject ();
+				jmoons.Add (m);
+			}
+
+			if (Moons.Length > 0) {
+				o ["Moons"] = jmoons;
+			}
+
+			return o;
 		}
 
 	}
@@ -138,7 +165,7 @@ namespace first.console.solution
 			int x = Generate.Next (0, max);
 			max = 0;
 			for (int i = 0; i < l; i++) {
-				int oldmax = max; 
+				int oldmax = max;
 				max += a[i];
 				if ((x >= oldmax)&&(x < max)){
 					return i;
@@ -146,7 +173,7 @@ namespace first.console.solution
 			}
 			return 0;
 		}
-		
+
 	}
 
 
@@ -157,7 +184,7 @@ namespace first.console.solution
 			Console.WriteLine ("Testing");
 
 
-			for (int i = 1; i == 1; i = 1) 
+			for (int i = 1; i == 1; i = 1)
 			{
 				SolarSystemGen ();
 				Console.WriteLine ();
@@ -190,10 +217,18 @@ namespace first.console.solution
 			}
 		}
 
-		public static JArray StarArraytoObject(Star[] s){
+		public static JArray StarArraytoJObject(Star[] s){
 			JArray arr = new JArray ();
 			for (int i =0;i<s.Length;i++){
-				arr.Add (s [i].toObject ());
+				arr.Add (s [i].toJObject ());
+			}
+			return arr;
+		}
+
+		public static JArray PlanetArraytoJObject(Planet[] s){
+			JArray arr = new JArray ();
+			for (int i =0;i<s.Length;i++){
+				arr.Add (s[i].toJObject ());
 			}
 			return arr;
 		}
@@ -208,7 +243,7 @@ namespace first.console.solution
 			Random Generate = new Random ();
 			Choose Dice = new Choose ();
 
-			int PlanetAmount = Generate.Next (0,1);
+			int PlanetAmount = Generate.Next (0,8);
 			int StarAmount = Dice.Roll (new int[] {800, 170, 26, 4}) + 1;
 			//int[] bla = { 1, 2, 3 };
 
@@ -236,17 +271,39 @@ namespace first.console.solution
 
 			if (PlanetAmount == 0) {
 				Console.WriteLine ("There are no planets in this system.");
-			} else 
+			} else
 			{
 
 				Console.WriteLine ("There are " + PlanetAmount + " Planets in this system.");
 				PrintPlanetArray (Planets);
 			}
 
-			Console.WriteLine ("Het object:");
+			Console.WriteLine ("\nHet object:");
 
-			JArray a = StarArraytoObject (Stars);
-			Console.WriteLine (a.ToString ());
+
+			//Build Json objects, and write them to file.
+			JObject jsector = new JObject ();
+
+			JArray s = StarArraytoJObject (Stars);
+			JArray p = PlanetArraytoJObject (Planets);
+			if (Stars.Length > 0) {
+				jsector ["Stars"] = s;
+			}
+			if (Planets.Length > 0) {
+				jsector ["Planets"] = p;
+			}
+			string jsonstring = jsector.ToString ();
+			File.WriteAllText("output.json", jsonstring);
+
+			//Show me!
+			//Console.WriteLine (jsonstring);
+
+			//Test gaussian distribution.
+			var r = new Random();
+			for (int i = 0;i<25;i++){
+				var x = r.NextGaussian(5,2); //Get a number around 5, with a 2 deviation.
+				Console.WriteLine (x);
+			}
 		}
 	}
 }
