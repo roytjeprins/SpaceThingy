@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "first.console.solution", "first.console.solution\first.console.solution.csproj", "{71681902-1E1D-43CB-AC07-CCC70B3D2BFD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniverseGenerator", "UniverseGenerator\Universe Generator.csproj", "{71681902-1E1D-43CB-AC07-CCC70B3D2BFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
