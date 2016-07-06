@@ -8,8 +8,8 @@ using Superbest_random;
 namespace first.console.solution
 {
 	class OrbitingBody {
-		public double Mass = 0;
-		public double Diameter = 0;
+		public double Mass = 0;				//in grams
+		public double Diameter = 0;			//in meters
 		public int OrbitingRadius = 0;
 		static Random generate = new Random();
 
@@ -21,9 +21,6 @@ namespace first.console.solution
 		}
 		public void SetMass (double min, double max){
 			Mass = generate.NextDouble() * (max - min) + min;
-		}
-		public void SetDiameter (double min, double max){
-			Diameter = generate.NextDouble () * (max - min) + min;
 		}
 	}
 	class Star: OrbitingBody {
@@ -45,7 +42,7 @@ namespace first.console.solution
 		static Choose Dice = new Choose ();
 
 		public Star(){
-			StarCategory = StarCategoryArray [Dice.Roll (new int[]{ 95, 3, 2, 1 })];
+			StarCategory = StarCategoryArray [Dice.Roll (new int[]{ 950, 15, 7, 4 })];
 
 			if (StarCategory == "Star") {
 				StarColor = StarColorArray [Dice.Roll (new int[]{ 765, 121, 76, 30, 6, 2, 1})];
@@ -64,7 +61,8 @@ namespace first.console.solution
 					SetMass (8.1E33, 12E33);
 				}else if(StarSize=="Hypergiant"){
 					SetMass (12.1E33, 20E33);
-				}				 		
+				}
+				Diameter = (Mass / 1E33) * 14E8;
 			} else if (StarColor == "Orange") {
 				if (StarSize == "Dwarf") {
 					SetMass (0.9E33, 1.6E33);				
@@ -74,7 +72,8 @@ namespace first.console.solution
 					SetMass (8.7E33, 15E33);
 				}else if(StarSize=="Hypergiant"){
 					SetMass (15.1E33, 26E33);
-				}					
+				}	
+				Diameter = (Mass / 1E33) * 12E8;
 			} else if (StarColor == "Yellow") {
 				if (StarSize == "Dwarf") {
 					SetMass (1.6E33, 2.08E33);				
@@ -84,7 +83,8 @@ namespace first.console.solution
 					SetMass (9.1E33, 18E33);
 				}else if(StarSize=="Hypergiant"){
 					SetMass (18.1E33, 40E33);
-				}		
+				}	
+				Diameter = (Mass / 1E33) * 10E8;
 			} else if (StarColor == "Yellow White") {
 				if (StarSize == "Dwarf") {
 					SetMass (2.08E33, 2.8E33);			
@@ -94,7 +94,8 @@ namespace first.console.solution
 					SetMass (10.6E33, 20E33);
 				}else if(StarSize=="Hypergiant"){
 					SetMass (20.1E33, 44E33);
-				}							
+				}	
+				Diameter = (Mass / 1E33) * 3.5E8;
 			} else if (StarColor == "White") {
 				if (StarSize == "Dwarf") {
 					SetMass (2.8E33, 4.2E33);			
@@ -104,7 +105,8 @@ namespace first.console.solution
 					SetMass (12.1E33, 25E33);
 				}else if(StarSize=="Hypergiant"){
 					SetMass (25.1E33, 48E33);
-				}							
+				}		
+				Diameter = (Mass / 1E33) * 2.5E8;
 			} else if (StarColor == "Blue White") {
 				if (StarSize == "Dwarf") {
 					SetMass (4.2E33, 32E33);			
@@ -115,6 +117,7 @@ namespace first.console.solution
 				}else if(StarSize=="Hypergiant"){
 					SetMass (62.5E33, 87E33);
 				}	
+				Diameter = (Mass / 1E33) * 1.5E8;
 			} else if (StarColor == "Blue") {
 				if (StarSize == "Dwarf") {
 					SetMass (32E33, 64E33);			
@@ -125,6 +128,7 @@ namespace first.console.solution
 				}else if(StarSize=="Hypergiant"){
 					SetMass (122.1E33, 235E33);
 				}
+				Diameter = (Mass / 1E33) * 1E8;
 			}
 			if (StarCategory == "Black Hole") {
 				SetMass (10E33, 80E33);
@@ -141,6 +145,7 @@ namespace first.console.solution
 			Console.WriteLine ("Category           : " + StarCategory);
 			if(StarCategory != StarType){
 				Console.WriteLine (" Type              : " + StarType);
+				Console.WriteLine (" Diameter          : " + Diameter.ToString("E2"));
 			}
 
 			Console.WriteLine (" Distance to center: " + OrbitingRadius);
