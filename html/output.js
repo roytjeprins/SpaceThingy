@@ -15,21 +15,6 @@ $(function(){
     x += (ds/2);
     y += (ds/2);
 
-
-
-
-    var w =  parseInt($("ul.solarsystem li.earth").css('width'));
-    var h =  parseInt($("ul.solarsystem li.earth").css('height'));
-    $("ul.solarsystem li.earth").css('left', x - (w/2));
-    $("ul.solarsystem li.earth").css('top', y - (h/2));
-    $("ul.solarsystem li.earth span").css('left', w/2 - 5);
-    $("ul.solarsystem li.earth span").css('top', -5);
-
-
-
-    $("ul.solarsystem li.mars").css('left', 80);
-    console.log("Done aligning items");
-
     //Assume there is one star:
     var sunsz = 0;
     for (var i =0;i<1/*solarsystem.Stars.length*/;i++){
@@ -92,6 +77,7 @@ $(function(){
 
         //Orbit size:
         var w = solarsystem.Planets[i].OrbitingRadius / 2;
+        w -= w%2; //Round to even number.
         var h = w;
 
         //Set it:
@@ -132,7 +118,10 @@ $(function(){
         $div.click(function(){ /* ... */ });
         $("#descriptions").append($div);
         var name = solarsystem.Planets[i].Name;
-        $div.append("<h2 id='"+name+"'>"+name+"</h2>");
+        $div.append("<h2 id='"+name+"'>"+name+"</h2>" +
+            "<p>OrbitingRadius: "+solarsystem.Planets[i].OrbitingRadius +"</p>"
+        );
+
         console.log("Built you a button");
 
     }
