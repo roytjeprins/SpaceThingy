@@ -8,6 +8,7 @@ using Superbest_random;
 namespace first.console.solution
 {
 	class OrbitingBody {
+		public static int Instances = 0;
 		public double Mass = 0;				//in grams
 		public double Diameter = 0;			//in meters
 		public int OrbitingRadius = 0;
@@ -16,6 +17,7 @@ namespace first.console.solution
 
 
 		public OrbitingBody (){
+			Instances++;
 			OrbitingRadius = generate.Next(0,1000);
 			Mass = generate.Next (0,1000);
 		}
@@ -172,6 +174,7 @@ namespace first.console.solution
 			"Volcanic","Barren","Continental","Oceanic","Gas Giant"
 		};
 		static Random Generate = new Random ();
+		public string Name;
 
 		Planet[] Moons;
 
@@ -180,16 +183,20 @@ namespace first.console.solution
 			PlanetType = PlanetTypeList [x];
 
 			if (nummoons < 0) {
-				nummoons = Generate.Next(0,5);
+				nummoons = Generate.Next(0,3);
 			}
 
 			Moons = new Planet[nummoons];
 			for (int i = 0; i < nummoons; i++) {
 				Moons [i] = new Planet (0);
 			}
+
+			//Set the name:
+			Name = "Planet" + Instances;
 		}
 
 		public void Print (string h){
+			Console.WriteLine (h + "Name:              : " + Name);
 			Console.WriteLine (h + "Type               : " + PlanetType);
 			Console.WriteLine (h + " Distance to center: " + OrbitingRadius);
 			Console.WriteLine (h + " Mass              : " + Mass);
@@ -204,11 +211,13 @@ namespace first.console.solution
 			JObject o = new JObject (); //The object to be returned.
 			JValue jMass = new JValue (Mass);
 			JValue jOR = new JValue (OrbitingRadius);
+			JValue jType = new JValue(PlanetType);
+			JValue jName = new JValue(Name);
 
-			JValue jType = new JValue (PlanetType);
 			o["Mass"] = jMass;
 			o["OrbitingRadius"] = jOR;
 			o["PlanetType"] = jType;
+			o["Name"] = jName;
 
 			//Moon array:
 			JArray jmoons = new JArray();
@@ -317,7 +326,7 @@ namespace first.console.solution
 			Random Generate = new Random ();
 			Choose Dice = new Choose ();
 
-			int PlanetAmount = Generate.Next (0,1);
+			int PlanetAmount = Generate.Next (4,9);
 			int StarAmount = Dice.Roll (new int[] {800, 170, 26, 4}) + 1;
 			//int[] bla = { 1, 2, 3 };
 
