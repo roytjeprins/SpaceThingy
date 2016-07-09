@@ -373,7 +373,7 @@ namespace first.console.solution
 			if (Planets.Length > 0) {
 				jsector ["Planets"] = p;
 			}
-			string jsonstring = jsector.ToString ();
+			string jsonstring = "var solarsystem = " + jsector.ToString () + ";";
 			File.WriteAllText("output.json", jsonstring);
 			//End write to file.
 
