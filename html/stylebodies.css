@@ -87,10 +87,12 @@ ul.solarsystem li.orbit {
     z-index: 97;
 }
 
-ul.solarsystem li.orbit li.planet {
-    background: #06c;
-    top: -5px;
-    left: 100px;
+ul.solarsystem li.orbit li.planet {    
+    width: 20px;
+    height: 20px;
+    border-radius: 12px;
+    background: #ccc;
+    z-index: 100;
 }
 
 
@@ -115,20 +117,22 @@ ul.solarsystem li.mars span {
 ul.solarsystem li {
     -webkit-animation-iteration-count:infinite;
     -webkit-animation-timing-function:linear;
-    -webkit-animation-name:orbit;
+    -webkit-animation-name:animorbit;
 
     -moz-animation-iteration-count:infinite;
     -moz-animation-timing-function:linear;
-    -moz-animation-name:orbit;
+    -moz-animation-name:animorbit;
 }
 
-ul.solarsystem li.planet {-webkit-animation-duration:12s; -moz-animation-duration:12s;}
-ul.solarsystem li.planet span {-webkit-animation-duration:2s; -moz-animation-duration:2s;}
+ul.solarsystem li.orbit {-webkit-animation-duration:12s; -moz-animation-duration:12s;}
+/*
+
+ul.solarsystem li.orbit li.planet {-webkit-animation-duration:2s; -moz-animation-duration:2s;}
 ul.solarsystem li.mars {-webkit-animation-duration:20s; -moz-animation-duration:20s;}
+*/
 
-
-@-webkit-keyframes orbit { from { -webkit-transform:rotate(0deg) } to { -webkit-transform:rotate(360deg) } }
+@-webkit-keyframes animorbit { from { -webkit-transform:rotate(0deg) } to { -webkit-transform:rotate(360deg) } }
 @-webkit-keyframes moon { from { -webkit-transform:rotate(0deg) } to { -webkit-transform:rotate(360deg) } }
 
-@-moz-keyframes orbit { from { -moz-transform:rotate(0deg) } to { -moz-transform:rotate(360deg) } }
+@-moz-keyframes animorbit { from { -moz-transform:rotate(0deg) } to { -moz-transform:rotate(360deg) } }
 @-moz-keyframes moon { from { -moz-transform:rotate(0deg) } to { -moz-transform:rotate(360deg) } }

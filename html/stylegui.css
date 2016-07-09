@@ -1,24 +1,10 @@
-/* - - - - - - - - - - - - - - -
-
-Title: Our Solar System
-Description: An experiment with CSS3 border-radius, transforms & animations.
-Author: Alex Giron
-Email: alexgiron@gmail.com
-Twitter: @giron
-
-www.neography.com
-www.nclud.com
-www.cssbeauty.com
-
-- - - - - - - - - - - - - - - - - */
-
-* {
+*{
     margin: 0;
     padding: 0;
 }
 body {
     font: 14px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background: #080e24 url(bg.jpg) repeat;
+    background: #02040e;
     color: #626668;
 }
 

@@ -30,8 +30,29 @@ $(function(){
     $("ul.solarsystem li.mars").css('left', 80);
     console.log("Done aligning items");
 
+    //Assume there is one star:
+    var sunsz = 0;
+    for (var i =0;i<1/*solarsystem.Stars.length*/;i++){
+        sunsz = Math.round(solarsystem.Stars[i].Diameter / 10E6);
+        console.log("Je zon is " + w);
+
+        //Set the size:
+        $("ul.solarsystem li.sun").css('width', sunsz);
+        $("ul.solarsystem li.sun").css('height', sunsz);
+        $("ul.solarsystem li.sun").css('left', 420 -  (sunsz/2));
+        $("ul.solarsystem li.sun").css('top', 420 -  (sunsz/2));
+        $("ul.solarsystem li.sun").css('border-radius',(sunsz / 2 )+ 2);
+
+        //Color it...:
+        var strColor = solarsystem.Stars[i].StarColor;
+        if (strColor == ""){}
+
+    }
+
+
 
     //Create the planets
+    var zindex = 0;
     for (var i =0;i<solarsystem.Planets.length;i++){
         //Create their orbit:
         var $div = $("<li>", {id: solarsystem.Planets[i].Name+"Orbit", class: "orbit"});
@@ -47,10 +68,36 @@ $(function(){
         $div.css('width',w);
         $div.css('height',h);
         $div.css('border-radius',(w / 2 )+ 2);
+        $div.css('z-index',zindex++);
+
 
         //Center them around sun.
-        $div.css('left',418 - (w/2));
-        $div.css('top',418 - (h/2));
+        var l = 418 - (w/2);
+        var t = 418 - (h/2);
+        $div.css('left',l);
+        $div.css('top',t);
+        $div.css('-webkit-animation-duration:'+5+'s');
+
+
+        //Make the planets:
+        $planet = $("<li>", {class: "planet"});
+        $div.append($planet);
+        $div.css('z-index',zindex++);
+
+        //Set their size:
+        var pw = 10;
+        var ph = 10;
+        var pl = (w/2) - (pw/2);
+        var pt = -2 - (ph / 2);
+        $planet.css('width',pw);
+        $planet.css('height',pw);
+        $planet.css('left',pl);
+        $planet.css('top',pt);
+        $planet.css('border-radius',(pw / 2 )+ 2);
+        $planet.css('z-index',zindex++);
+
+
+        
 
         //Make the buttons:
         $div = $("<li>", {});

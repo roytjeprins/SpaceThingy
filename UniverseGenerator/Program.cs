@@ -18,7 +18,7 @@ namespace first.console.solution
 
 		public OrbitingBody (){
 			Instances++;
-			OrbitingRadius = generate.Next(0,1000);
+			OrbitingRadius = generate.Next(100,1500);
 			Mass = generate.Next (0,1000);
 		}
 		public void SetMass (double min, double max){
@@ -160,7 +160,9 @@ namespace first.console.solution
 			JValue jOR = new JValue (OrbitingRadius);
 			JValue jCat = new JValue (StarCategory);
 			JValue jType = new JValue (StarType);
+			JValue jDiameter = new JValue (Diameter);
 			o["Mass"] = jMass;
+			o["Diameter"] = jDiameter;
 			o["OrbitingRadius"] = jOR;
 			o["StarCategory"] = jCat;
 			o["StarType"] = jType;
@@ -213,8 +215,10 @@ namespace first.console.solution
 			JValue jOR = new JValue (OrbitingRadius);
 			JValue jType = new JValue(PlanetType);
 			JValue jName = new JValue(Name);
+			JValue jDiameter = new JValue(Diameter);
 
 			o["Mass"] = jMass;
+			o["Diameter"] = jDiameter;
 			o["OrbitingRadius"] = jOR;
 			o["PlanetType"] = jType;
 			o["Name"] = jName;
