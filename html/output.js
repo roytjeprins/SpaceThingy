@@ -45,11 +45,10 @@ $(function(){
 
         //Color it...:
         var strColor = solarsystem.Stars[i].StarColor;
-        if (strColor == ""){}
+        if (strColor == ""){
 
+        }
     }
-
-
 
     //Create the planets
     var zindex = 0;
@@ -57,7 +56,7 @@ $(function(){
         //Create their orbit:
         var $div = $("<li>", {id: solarsystem.Planets[i].Name+"Orbit", class: "orbit"});
         $div.click(function(){ /* ... */ });
-        $(".solarsystem").append($div);
+       
         console.log("Built you an orbit.");
 
         //Orbit size:
@@ -70,14 +69,15 @@ $(function(){
         $div.css('border-radius',(w / 2 )+ 2);
         $div.css('z-index',zindex++);
 
-
         //Center them around sun.
         var l = 418 - (w/2);
         var t = 418 - (h/2);
         $div.css('left',l);
         $div.css('top',t);
-        $div.css('-webkit-animation-duration:'+5+'s');
+        var t = solarsystem.Planets[i].OrbitingTime;
+        $div.css({'-webkit-animation-duration' : t+'s'});
 
+        $(".solarsystem").append($div);
 
         //Make the planets:
         $planet = $("<li>", {class: "planet"});
@@ -85,19 +85,15 @@ $(function(){
         $div.css('z-index',zindex++);
 
         //Set their size:
-        var pw = 10;
-        var ph = 10;
-        var pl = (w/2) - (pw/2);
-        var pt = -2 - (ph / 2);
-        $planet.css('width',pw);
-        $planet.css('height',pw);
+        var psz = 2 + solarsystem.Planets[i].Mass / 50;
+        var pl = (w/2) - (psz/2);
+        var pt = -2 - (psz / 2);
+        $planet.css('width',psz);
+        $planet.css('height',psz);
         $planet.css('left',pl);
         $planet.css('top',pt);
-        $planet.css('border-radius',(pw / 2 )+ 2);
+        $planet.css('border-radius',(psz / 2 )+ 2);
         $planet.css('z-index',zindex++);
-
-
-        
 
         //Make the buttons:
         $div = $("<li>", {});

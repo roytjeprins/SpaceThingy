@@ -124,9 +124,9 @@ ul.solarsystem li {
     -moz-animation-name:animorbit;
 }
 
-ul.solarsystem li.orbit {-webkit-animation-duration:12s; -moz-animation-duration:12s;}
-/*
 
+/*
+ul.solarsystem li.orbit {-webkit-animation-duration:12s; -moz-animation-duration:12s;}
 ul.solarsystem li.orbit li.planet {-webkit-animation-duration:2s; -moz-animation-duration:2s;}
 ul.solarsystem li.mars {-webkit-animation-duration:20s; -moz-animation-duration:20s;}
 */

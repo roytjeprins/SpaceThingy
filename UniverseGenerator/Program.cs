@@ -12,6 +12,7 @@ namespace first.console.solution
 		public double Mass = 0;				//in grams
 		public double Diameter = 0;			//in meters
 		public int OrbitingRadius = 0;
+		public int OrbitingTime = 0;
 		static Random generate = new Random();
 
 
@@ -19,6 +20,8 @@ namespace first.console.solution
 		public OrbitingBody (){
 			Instances++;
 			OrbitingRadius = generate.Next(100,1500);
+			OrbitingTime = generate.Next(500,6000);
+			OrbitingTime /= 100;
 			Mass = generate.Next (0,1000);
 		}
 		public void SetMass (double min, double max){
@@ -206,13 +209,13 @@ namespace first.console.solution
 			for (int i = 0; i < Moons.Length; i++) {
 				Moons [i].Print("   ");
 			}
-
 		}
 
 		public JObject toJObject(){
 			JObject o = new JObject (); //The object to be returned.
 			JValue jMass = new JValue (Mass);
 			JValue jOR = new JValue (OrbitingRadius);
+			JValue jOT = new JValue (OrbitingTime);
 			JValue jType = new JValue(PlanetType);
 			JValue jName = new JValue(Name);
 			JValue jDiameter = new JValue(Diameter);
@@ -220,6 +223,7 @@ namespace first.console.solution
 			o["Mass"] = jMass;
 			o["Diameter"] = jDiameter;
 			o["OrbitingRadius"] = jOR;
+			o["OrbitingTime"] = jOT;
 			o["PlanetType"] = jType;
 			o["Name"] = jName;
 
