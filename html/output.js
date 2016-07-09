@@ -22,7 +22,7 @@ $(function(){
     var h =  parseInt($("ul.solarsystem li.earth").css('height'));
     $("ul.solarsystem li.earth").css('left', x - (w/2));
     $("ul.solarsystem li.earth").css('top', y - (h/2));
-    $("ul.solarsystem li.earth span").css('left', w/2 - 5   );
+    $("ul.solarsystem li.earth span").css('left', w/2 - 5);
     $("ul.solarsystem li.earth span").css('top', -5);
 
 
@@ -45,9 +45,40 @@ $(function(){
 
         //Color it...:
         var strColor = solarsystem.Stars[i].StarColor;
-        if (strColor == ""){
-
+        var color1 = 'rgb(245,245,245)'; //Bottom, yellow
+        var color2 = '#fff'; //Top.        
+        switch (strColor){
+            case "Red":                
+                color2 = 'rgb(204,2,0)';
+            break;
+            case "Orange":
+                color2 = 'rgb(248,155,0)';
+            break;
+            case "Yellow":
+                color2 = 'rgb(245,201,22)';
+            break;
+            case "Yellow White":
+                color2 = 'rgb(250,245,200)';
+            break;
+            case "White":
+                color2 = 'rgb(255,255,255)';
+            break;
+            case "Blue White":
+                color2 = 'rgb(218,235,245)';
+            break;
+            case "Blue":
+                color2 = 'rgb(0,115,190)';
+            break;
+            default:
         }
+      
+        
+        $("ul.solarsystem li.sun").css({
+            background: "-webkit-gradient(linear, left bottom, left top, color-stop(0.35, "+color2+"), color-stop(1.00, "+color1+"))" 
+        });
+
+
+        $("ul.solarsystem li.sun").css('box-shadow', '0 0 ' + (25+(sunsz/5)) + 'px ' + color2);
     }
 
     //Create the planets

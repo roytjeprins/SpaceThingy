@@ -164,11 +164,13 @@ namespace first.console.solution
 			JValue jCat = new JValue (StarCategory);
 			JValue jType = new JValue (StarType);
 			JValue jDiameter = new JValue (Diameter);
+			JValue jColor = new JValue (StarColor);
 			o["Mass"] = jMass;
 			o["Diameter"] = jDiameter;
 			o["OrbitingRadius"] = jOR;
 			o["StarCategory"] = jCat;
 			o["StarType"] = jType;
+			o["StarColor"] = jColor;
 			return o;
 		}
 	}

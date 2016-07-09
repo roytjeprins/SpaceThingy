@@ -76,8 +76,6 @@ ul.solarsystem li.sun {
 }
 
 /*Planets*/
-
-/*planet*/
 ul.solarsystem li.orbit {
     width: 200px;
     height: 200px;
@@ -95,24 +93,6 @@ ul.solarsystem li.orbit li.planet {
     z-index: 100;
 }
 
-
-/*Mars*/
-ul.solarsystem li.mars {
-    width: 480px;
-    height: 480px;
-    -webkit-border-radius: 242px;
-    -moz-border-radius: 242px;
-    border-radius: 242px;
-    z-index: 96;
-}
-ul.solarsystem li.mars span {
-    background: #aa4200;
-    top: 0px;
-    left: 0px;
-}
-
-
-
 /* CSS3 Animations */
 ul.solarsystem li {
     -webkit-animation-iteration-count:infinite;
@@ -124,15 +104,5 @@ ul.solarsystem li {
     -moz-animation-name:animorbit;
 }
 
-
-/*
-ul.solarsystem li.orbit {-webkit-animation-duration:12s; -moz-animation-duration:12s;}
-ul.solarsystem li.orbit li.planet {-webkit-animation-duration:2s; -moz-animation-duration:2s;}
-ul.solarsystem li.mars {-webkit-animation-duration:20s; -moz-animation-duration:20s;}
-*/
-
 @-webkit-keyframes animorbit { from { -webkit-transform:rotate(0deg) } to { -webkit-transform:rotate(360deg) } }
-@-webkit-keyframes moon { from { -webkit-transform:rotate(0deg) } to { -webkit-transform:rotate(360deg) } }
-
 @-moz-keyframes animorbit { from { -moz-transform:rotate(0deg) } to { -moz-transform:rotate(360deg) } }
-@-moz-keyframes moon { from { -moz-transform:rotate(0deg) } to { -moz-transform:rotate(360deg) } }
