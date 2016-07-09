@@ -73,6 +73,7 @@ ul.solarsystem li.sun {
     -moz-transition: all 0.2s ease-in;
     -o-transition: all 0.2s ease-in;
     transition: all 0.2s ease-in;
+    opacity : 1.0;
 }
 
 /*Planets*/

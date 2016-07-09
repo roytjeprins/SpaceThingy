@@ -1,28 +1,8 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
-    <!--
-	********************************************************************************
-
-	Our Solar System by Alex Giron
-
-	An experiment with CSS3 border-radius, transforms & animations.
-
-	Learn more about it at:
-	http://neography.com/journal/our-solar-system-in-css3/
-
-	Send comments/suggestions to alexgiron@gmail.com or a tweet to @giron
-
-  http://neography.com/experiment/circles/solarsystem/
-
-	Cheers!
-
-	********************************************************************************
-    -->
-
   <head>
-    <title>Our Solar System — An experiment with CSS3 border-radius, transforms &amp; animations.</title>
+    <title>SolarSystem Viewer</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -44,9 +24,9 @@
         <script type="text/javascript" src="output.js"></script>
         <script type="text/javascript" charset="utf-8">
           $(function(){
-            $('ul#descriptions h2').hover(function(){
-              $('ul.solarsystem li.' + $(this).attr('id') ).toggleClass('active');
-
+            $('ul#descriptions h2').hover(function(){               
+              $('ul.solarsystem li#' + $(this).attr('id')).toggleClass('active');
+              console.log('ul.solarsystem li.' + $(this).attr('id'));
             })
           });
           </script>
@@ -60,44 +40,14 @@
 
         <ul class="solarsystem">
         <li id="sun" class="sun"></li>
-        <!--
-          <li class="mercury"><a href="#mercury"><span>Mercury</span></a></li>
-          <li class="venus"><a href="#venus"><span>Venus</span></a></li>
-        -->
 
-
-
-        <!--
-          <li class="asteroids_meteorids"><span>Asteroids &amp; Meteorids</span></li>
-          <li class="jupiter"><a href="#jupiter"><span>Jupiter</span></a></li>
-          <li class="saturn"><a href="#saturn"><span>Saturn &amp; <span class="ring">Ring</span></span></a></li>
-          <li class="uranus"><a href="#uranus"><span>Uranus</span></a></li>
-          <li class="neptune"><a href="#neptune"><span>Neptune</span></a></li>
-          <li class="pluto"><a href="#pluto"><span>Pluto</span></a></li>
-          -->
         </ul>
 
-        <ul id="descriptions">
-        <!--
-            <li>
+        <ul id="descriptions">  
+                     <li>
             <h2 id="sun">Sun</h2>
-            <p>Sun</p>
+            
             </li>
-            <li>
-            <h2 id="venus">Venus</h2>
-            <p>Venus</p>
-            </li>
-
-            <li>
-            <h2 id="earth">Earth</h2>
-            <p>Earth</p>
-            </li>
-
-            <li>
-            <h2 id="mars">Mars</h2>
-            <p>Mars</p>
-            </li>
--->
         </ul>
 
     </section>

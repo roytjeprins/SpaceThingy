@@ -1,5 +1,5 @@
 
-
+solarsystem.Zones = {};
 
 //Load the system
 console.log("You have "+solarsystem.Stars.length+ " Star(s)");
@@ -85,7 +85,7 @@ $(function(){
     var zindex = 0;
     for (var i =0;i<solarsystem.Planets.length;i++){
         //Create their orbit:
-        var $div = $("<li>", {id: solarsystem.Planets[i].Name+"Orbit", class: "orbit"});
+        var $div = $("<li>", {id: solarsystem.Planets[i].Name+"", class: "orbit"});
         $div.click(function(){ /* ... */ });
        
         console.log("Built you an orbit.");
@@ -99,6 +99,7 @@ $(function(){
         $div.css('height',h);
         $div.css('border-radius',(w / 2 )+ 2);
         $div.css('z-index',zindex++);
+
 
         //Center them around sun.
         var l = 418 - (w/2);
