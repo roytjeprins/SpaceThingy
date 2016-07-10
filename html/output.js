@@ -18,8 +18,12 @@ $(function(){
     //Assume there is one star:
     var sunsz = 0;
     for (var i =0;i<1/*solarsystem.Stars.length*/;i++){
-        sunsz = Math.round(solarsystem.Stars[i].Diameter / 10E6);
-        console.log("Je zon is " + w);
+        var star = solarsystem.Stars[i];
+        sunsz = Math.round(star.Diameter / 10E6);
+        //Limit it:
+        if (sunsz > 300){
+            sunsz = 300;
+        }
 
         //Set the size:
         $("ul.solarsystem li.sun").css('width', sunsz);
@@ -55,15 +59,19 @@ $(function(){
                 color2 = 'rgb(0,115,190)';
             break;
             default:
-        }
-      
+        }      
         
         $("ul.solarsystem li.sun").css({
             background: "-webkit-gradient(linear, left bottom, left top, color-stop(0.35, "+color2+"), color-stop(1.00, "+color1+"))" 
         });
 
-
         $("ul.solarsystem li.sun").css('box-shadow', '0 0 ' + (25+(sunsz/5)) + 'px ' + color2);
+
+        //Add star details to hover:
+       $("#descriptions li #sun").after(
+            "<p>Diameter : "+ parseFloat(star.Diameter/(1000.0*1000000.0)).toFixed(2) + " Million km<br>"+
+            "   Mass     : "+ parseFloat(star.Mass/(1000000.0 * 1000.0*1000.0)).toPrecision(3) + " MegaTonnes</p>"
+        );
     }
 
     //Create the planets

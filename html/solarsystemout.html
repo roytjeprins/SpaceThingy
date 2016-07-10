@@ -1,59 +1,50 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <title>SolarSystem Viewer</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <meta name="author" content="Alex Giron" />
-    <meta name="copyright" content="Neography" />
-
-    <link rel="stylesheet" type="text/css" media="screen,projection" href="stylegui.css" />
-    <link rel="stylesheet" type="text/css" media="screen,projection" href="stylebodies.css" />
-
-
-        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-        <script src="http://www.google.com/jsapi"></script>
-
-        <script>
-          // Load jQuery
-          google.load("jquery", "1");
-        </script>
-        <script type="text/javascript" src="../UniverseGenerator/bin/Debug/output.json"></script>
-        <script type="text/javascript" src="output.js"></script>
-        <script type="text/javascript" charset="utf-8">
-          $(function(){
-            $('ul#descriptions h2').hover(function(){               
-              $('ul.solarsystem li#' + $(this).attr('id')).toggleClass('active');
-              console.log('ul.solarsystem li.' + $(this).attr('id'));
-            })
+    <meta http-equiv="content-type" content="text/html"/>    
+    <link rel="stylesheet" type="text/css" media="screen,projection" href="stylegui.css"/>
+    <link rel="stylesheet" type="text/css" media="screen,projection" href="stylebodies.css"/>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <script src="http://www.google.com/jsapi"></script>
+    <script>google.load("jquery", "1");</script>
+    <script type="text/javascript" src="../UniverseGenerator/bin/Debug/output.json"></script>
+    <script type="text/javascript" src="output.js"></script>
+    <script type="text/javascript">
+      var zoom = 1.0;
+      $(function(){
+        $('ul#descriptions h2').hover(function(){               
+          $('ul.solarsystem li#' + $(this).attr('id')).toggleClass('active');
+            //console.log('ul.solarsystem li.' + $(this).attr('id'));
+          })
+          
+          $( window ).click(function() {
+            zoom = 1.00;
+            $('ul.solarsystem').css('transform','scale('+zoom+')');              
           });
-          </script>
+          
+          $(window).bind('mousewheel DOMMouseScroll', function(event){
+          if (event.originalEvent.wheelDelta > 0 || event.originalEvent.detail < 0){              
+            zoom *= 1.10;
+            $('ul.solarsystem').css('transform','scale('+zoom+')');
+          }else{
+            zoom *= 0.90;
+            $('ul.solarsystem').css('transform','scale('+zoom+')');
+          }
+        });
+      });      
+  </script>
   </head>
-
   <body>
-
-  <div class="wrap clearfix">
-    
-    <section class="clearfix">
-
-        <ul class="solarsystem">
+    <div id="canv">
+      <ul class="solarsystem">
         <li id="sun" class="sun"></li>
-
-        </ul>
-
-        <ul id="descriptions">  
-                     <li>
-            <h2 id="sun">Sun</h2>
-            
-            </li>
-        </ul>
-
-    </section>
-
-
-  </div>
-
+      </ul>
+      <ul id="descriptions">  
+        <li>
+          <h2 id="sun">Sun</h2>          
+        </li>
+      </ul>
+    </div>
   </body>
-  </html>
+</html>
