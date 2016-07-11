@@ -14,6 +14,7 @@ $(function(){
     //Add half the diameter.
     x += (ds/2);
     y += (ds/2);
+    console.log("X" + x, y)
 
     //Assume there is one star:
     var sunsz = 0;
@@ -85,6 +86,7 @@ $(function(){
 
         //Orbit size:
         var w = solarsystem.Planets[i].OrbitingRadius / 2;
+        w += sunsz; //Assume the orbit is more than the size of the sun
         w -= w%2; //Round to even number.
         var h = w;
 
