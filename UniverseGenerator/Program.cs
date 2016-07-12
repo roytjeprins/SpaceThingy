@@ -10,6 +10,7 @@ namespace first.console.solution
 	class OrbitingBody {
 		public double Mass = 0;				//in grams
 		public double Diameter = 0;			//in meters
+		public double Temperature = 0;		//in kelvin
 		public int OrbitingRadius = 0;
 		static Random generate = new Random();
 
@@ -22,12 +23,16 @@ namespace first.console.solution
 		public void SetMass (double min, double max){
 			Mass = generate.NextDouble() * (max - min) + min;
 		}
+		public void SetTemp (double min, double max){
+			Temperature = generate.NextDouble () * (max - min) + min;
+		}
 	}
 	class Star: OrbitingBody {
 		string StarCategory;
 		string StarSize;
 		string StarColor;
 		string StarType;
+		static Random generate = new Random();
 
 
 		static string[] StarCategoryArray = new string[]{
@@ -63,6 +68,7 @@ namespace first.console.solution
 					SetMass (12.1E33, 20E33);
 				}
 				Diameter = (Mass / 1E33) * 14E8;
+				SetTemp (2400, 3700);
 			} else if (StarColor == "Orange") {
 				if (StarSize == "Dwarf") {
 					SetMass (0.9E33, 1.6E33);				
@@ -74,6 +80,7 @@ namespace first.console.solution
 					SetMass (15.1E33, 26E33);
 				}	
 				Diameter = (Mass / 1E33) * 12E8;
+				SetTemp (3700, 5200);
 			} else if (StarColor == "Yellow") {
 				if (StarSize == "Dwarf") {
 					SetMass (1.6E33, 2.08E33);				
@@ -85,6 +92,7 @@ namespace first.console.solution
 					SetMass (18.1E33, 40E33);
 				}	
 				Diameter = (Mass / 1E33) * 10E8;
+				SetTemp (5200, 6000);
 			} else if (StarColor == "Yellow White") {
 				if (StarSize == "Dwarf") {
 					SetMass (2.08E33, 2.8E33);			
@@ -96,6 +104,7 @@ namespace first.console.solution
 					SetMass (20.1E33, 44E33);
 				}	
 				Diameter = (Mass / 1E33) * 3.5E8;
+				SetTemp (6000, 7500);
 			} else if (StarColor == "White") {
 				if (StarSize == "Dwarf") {
 					SetMass (2.8E33, 4.2E33);			
@@ -107,6 +116,7 @@ namespace first.console.solution
 					SetMass (25.1E33, 48E33);
 				}		
 				Diameter = (Mass / 1E33) * 2.5E8;
+				SetTemp (7500, 10000);
 			} else if (StarColor == "Blue White") {
 				if (StarSize == "Dwarf") {
 					SetMass (4.2E33, 32E33);			
@@ -118,6 +128,7 @@ namespace first.console.solution
 					SetMass (62.5E33, 87E33);
 				}	
 				Diameter = (Mass / 1E33) * 1.5E8;
+				SetTemp (10000, 30000);
 			} else if (StarColor == "Blue") {
 				if (StarSize == "Dwarf") {
 					SetMass (32E33, 64E33);			
@@ -129,13 +140,17 @@ namespace first.console.solution
 					SetMass (122.1E33, 235E33);
 				}
 				Diameter = (Mass / 1E33) * 1E8;
+				SetTemp (30000, 100000);
 			}
 			if (StarCategory == "Black Hole") {
 				SetMass (10E33, 80E33);
+				Diameter = (Mass / 1E33) * 1E3;
 			} else if (StarCategory == "Supernova") {
 				Mass = double.NaN;
 			} else if (StarCategory == "Neutron Star") {
 				SetMass (2.2E33, 6E33);
+				Diameter = (Mass / 1E33) * 5E3;
+				SetTemp (1E7,1E12);
 			}
 			if (StarCategory == "Star") {
 				StarType = StarColor + " " + StarSize;
@@ -150,6 +165,7 @@ namespace first.console.solution
 
 			Console.WriteLine (" Distance to center: " + OrbitingRadius);
 			Console.WriteLine (" Mass              : " + Mass.ToString("E2"));
+			Console.WriteLine (" Temperature       : " + Temperature.ToString ("E2"));
 		}
 
 		public JObject toJObject(){
@@ -317,7 +333,7 @@ namespace first.console.solution
 			Random Generate = new Random ();
 			Choose Dice = new Choose ();
 
-			int PlanetAmount = Generate.Next (0,1);
+			int PlanetAmount = Generate.Next (0,4);
 			int StarAmount = Dice.Roll (new int[] {800, 170, 26, 4}) + 1;
 			//int[] bla = { 1, 2, 3 };
 
