@@ -1,0 +1,121 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body {
+    font: 14px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #02040e;
+    color: #626668;
+}
+
+div.wrap {
+    width: 960px;
+    margin: 0 auto;
+    padding: 60px 0;
+}
+a.about, a.twitter {
+    display: block;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #32312b;
+    padding: 7px 28px;
+    text-decoration: none;
+    color: #eee5a2;
+    font-size: 12px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    -webkit-transition: all 0.15s ease-in;
+    -moz-transition: all 0.15s ease-in;
+    -o-transition: all 0.15s ease-in;
+    transition: all 0.15s ease-in;
+}
+a.twitter {
+       right: 220px;
+}
+a.about:hover, a.twitter:hover {
+    background: #aa4200;
+    color: #fff;
+}
+section {
+    display: block;
+    position: relative;
+}
+header {
+    text-align: center;
+}
+header h1 {
+    font-size: 126px;
+    line-height: 1;
+    color: #eee5a2;
+    text-transform: uppercase;
+    text-shadow: 5px 5px #32312b;
+}
+header p {
+    font-size: 24px;
+    color: #6a695f;
+    margin: 0 0 10px;
+}
+header p.disclaimer {
+    font-size: 13px;
+    color: #33373d;
+}
+
+
+ul#descriptions {
+    position: absolute;
+    top: 150px;
+    right: 100px;
+    list-style: none;
+}
+ul#descriptions h2 {
+    cursor: pointer;
+    color: #386077;
+    -webkit-transition: all 0.15s ease-in;
+    -moz-transition: all 0.15s ease-in;
+    -o-transition: all 0.15s ease-in;
+    transition: all 0.15s ease-in;
+    font-size: 20px;
+    position: relative;
+    z-index: 101;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+}
+ul#descriptions h2:hover {
+   color: #aa4200;
+    -webkit-transform: scale(1.08);
+    -moz-transform: scale(1.08);
+    -o-transform: scale(1.08);
+    transform: scale(1.08);
+}
+ul#descriptions li p {
+    position: absolute;
+    left: -250px;
+    top: 0;
+    width: 200px;
+    display: inline;
+    opacity: 0;
+    visibility: hidden;
+    font-size: 13px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+    background: #0f132c;
+    padding: 10px;
+    color: #fff;
+    line-height: 1.7;
+    z-index: 100;
+    border: 1px solid #1c203c;
+}
+ul#descriptions h2:hover+p {
+    visibility: visible;
+    opacity: 0.9;
+    left: -280px;
+}

@@ -8,16 +8,19 @@ using Superbest_random;
 namespace first.console.solution
 {
 	class OrbitingBody {
+		public static int Instances = 0;
 		public double Mass = 0;				//in grams
 		public double Diameter = 0;			//in meters
 		public double Temperature = 0;		//in kelvin
 		public int OrbitingRadius = 0;
+		public int OrbitingTime = 0;
 		static Random generate = new Random();
 
-
-
 		public OrbitingBody (){
-			OrbitingRadius = generate.Next(0,1000);
+			Instances++;
+			OrbitingRadius = generate.Next(100,1500);
+			OrbitingTime = generate.Next(500,6000);
+			OrbitingTime /= 100;
 			Mass = generate.Next (0,1000);
 		}
 		public void SetMass (double min, double max){
@@ -174,10 +177,16 @@ namespace first.console.solution
 			JValue jOR = new JValue (OrbitingRadius);
 			JValue jCat = new JValue (StarCategory);
 			JValue jType = new JValue (StarType);
+			JValue jDiameter = new JValue (Diameter);
+			JValue jColor = new JValue (StarColor);
+			JValue jTemperature = new JValue(Temperature);
 			o["Mass"] = jMass;
+			o["Diameter"] = jDiameter;
 			o["OrbitingRadius"] = jOR;
 			o["StarCategory"] = jCat;
 			o["StarType"] = jType;
+			o["StarColor"] = jColor;
+			o["Temperature"] = jTemperature;
 			return o;
 		}
 	}
@@ -188,6 +197,7 @@ namespace first.console.solution
 			"Volcanic","Barren","Continental","Oceanic","Gas Giant"
 		};
 		static Random Generate = new Random ();
+		public string Name;
 
 		Planet[] Moons;
 
@@ -196,16 +206,20 @@ namespace first.console.solution
 			PlanetType = PlanetTypeList [x];
 
 			if (nummoons < 0) {
-				nummoons = Generate.Next(0,5);
+				nummoons = Generate.Next(0,3);
 			}
 
 			Moons = new Planet[nummoons];
 			for (int i = 0; i < nummoons; i++) {
 				Moons [i] = new Planet (0);
 			}
+
+			//Set the name:
+			Name = "Planet" + Instances;
 		}
 
 		public void Print (string h){
+			Console.WriteLine (h + "Name:              : " + Name);
 			Console.WriteLine (h + "Type               : " + PlanetType);
 			Console.WriteLine (h + " Distance to center: " + OrbitingRadius);
 			Console.WriteLine (h + " Mass              : " + Mass);
@@ -213,18 +227,23 @@ namespace first.console.solution
 			for (int i = 0; i < Moons.Length; i++) {
 				Moons [i].Print("   ");
 			}
-
 		}
 
 		public JObject toJObject(){
 			JObject o = new JObject (); //The object to be returned.
 			JValue jMass = new JValue (Mass);
 			JValue jOR = new JValue (OrbitingRadius);
+			JValue jOT = new JValue (OrbitingTime);
+			JValue jType = new JValue(PlanetType);
+			JValue jName = new JValue(Name);
+			JValue jDiameter = new JValue(Diameter);
 
-			JValue jType = new JValue (PlanetType);
 			o["Mass"] = jMass;
+			o["Diameter"] = jDiameter;
 			o["OrbitingRadius"] = jOR;
+			o["OrbitingTime"] = jOT;
 			o["PlanetType"] = jType;
+			o["Name"] = jName;
 
 			//Moon array:
 			JArray jmoons = new JArray();
@@ -333,7 +352,8 @@ namespace first.console.solution
 			Random Generate = new Random ();
 			Choose Dice = new Choose ();
 
-			int PlanetAmount = Generate.Next (0,4);
+			int PlanetAmount = Generate.Next (4,9);
+
 			int StarAmount = Dice.Roll (new int[] {800, 170, 26, 4}) + 1;
 			//int[] bla = { 1, 2, 3 };
 
@@ -380,7 +400,7 @@ namespace first.console.solution
 			if (Planets.Length > 0) {
 				jsector ["Planets"] = p;
 			}
-			string jsonstring = jsector.ToString ();
+			string jsonstring = "var solarsystem = " + jsector.ToString () + ";";
 			File.WriteAllText("output.json", jsonstring);
 			//End write to file.
 

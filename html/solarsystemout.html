@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SolarSystem Viewer</title>
+    <meta http-equiv="content-type" content="text/html"/>    
+    <link rel="stylesheet" type="text/css" media="screen,projection" href="stylegui.css"/>
+    <link rel="stylesheet" type="text/css" media="screen,projection" href="stylebodies.css"/>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <script src="http://www.google.com/jsapi"></script>
+    <script>google.load("jquery", "1");</script>
+    <script type="text/javascript" src="../UniverseGenerator/bin/Debug/output.json"></script>
+   
+    <script type="text/javascript">
+      var zoom = 1.0;
+      $(function(){
+        $('ul#descriptions h2').hover(function(){               
+          $('ul.solarsystem li#' + $(this).attr('id')).toggleClass('active');
+            //console.log('ul.solarsystem li.' + $(this).attr('id'));
+          })
+          
+          $( window ).click(function() {
+            zoom = 1.00;
+            $('ul.solarsystem').css('transform','scale('+zoom+')');              
+          });
+          /*
+          $(window).bind('mousewheel DOMMouseScroll', function(event){
+            if (event.originalEvent.wheelDelta > 0 || event.originalEvent.detail < 0){              
+              zoom *= 1.10;
+              $('ul.solarsystem').css('transform','scale('+zoom+')');
+            }else{
+              zoom *= 0.90;
+              $('ul.solarsystem').css('transform','scale('+zoom+')');
+            }
+          });*/
+          //Resize:
+
+          $(window).resize(function() {
+            var w = $(window).width();
+            var h = $(window).height();
+            $('ul.solarsystem').css('height',h);
+            $('ul.solarsystem').css('width',w);
+
+            //Sun pos:
+            //$("ul.solarsystem li.sun").css('left',w/2);
+          });         
+
+        }
+      );
+    </script>
+    <script type="text/javascript" src="output.js"></script>
+  </head>
+  <body>
+    <div id="canv">
+      <ul class="solarsystem">
+        <li id="sun" class="sun"></li>
+      </ul>
+      <ul id="descriptions">  
+        <li>
+          <h2 id="sun">Sun</h2>          
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
